@@ -1,19 +1,14 @@
-# 全ディレクトリ対象
-/**/.gradle/
-/**/.idea/
-/**/.settings/
-/**/bin/
-/**/build/
-/**/doc/
+.checkstyle
+.classpath
+.gradle/
+.idea/
+.project
+.settings/
+bin/
+build/
+doc/
+
 /**/logs/
-/**/tmptest/
-/**/.checkstyle
-/**/.classpath
-/**/.project
+/**/tmp/
 /**/*~
-
-# ルート直下のサブディレクトリのみ
-/*/gradle/
-
-# Gradleラッパー関連
-/**/gradlew**
+/**/*.iml

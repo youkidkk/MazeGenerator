@@ -35,9 +35,29 @@ class MazeGenerator(paramWidth: Int = 0,
      * イニシャライザ。
      */
     init {
-        if (paramWidth  > MIN_WIDTH) { width  = paramWidth  * 2}
-        if (paramHeight > MIN_HEIGHT) { height = paramHeight * 2}
-        if (paramWayLength > MIN_WAY_LENGTH) { maxWayLength = paramWayLength }
+        if (paramWidth  > MIN_WIDTH) {
+            width = toEvenNumber(paramWidth)
+        }
+        if (paramHeight > MIN_HEIGHT) {
+            height = toEvenNumber(paramHeight)
+        }
+        if (paramWayLength > MIN_WAY_LENGTH) {
+            maxWayLength = paramWayLength
+        }
+    }
+
+    /**
+     * 数値が奇数の場合に１を加算して偶数にする。
+     *
+     * @param number 数値
+     * @return 偶数化した数値
+     */
+    private fun toEvenNumber(number: Int) : Int {
+        var result = number
+        if (number % 2 == 1) {
+            result = number + 1
+        }
+        return result
     }
 
     /**

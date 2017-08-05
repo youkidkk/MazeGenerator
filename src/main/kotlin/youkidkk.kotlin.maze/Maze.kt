@@ -70,7 +70,7 @@ class Maze(val width: Int, val height: Int) {
      *
      * @return 判定結果
      */
-    fun isNotOutOfRange(point: Point) : Boolean {
+    fun isInside(point: Point) : Boolean {
         return point.x in 1..width && point.y in 1..height
     }
 

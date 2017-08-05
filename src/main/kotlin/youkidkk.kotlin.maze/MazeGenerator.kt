@@ -117,7 +117,7 @@ class MazeGenerator(paramWidth: Int = 0,
             // 対象の地点を取得
             val directionPoint = point + (it.pointInc * 2)
 
-            if (maze.isNotOutOfRange(directionPoint) && !maze.get(directionPoint).passible) {
+            if (maze.isInside(directionPoint) && !maze.get(directionPoint).passible) {
                 // 対象の地点が範囲内、かつ掘られていない場合、戻り値に追加する
                 result.add(it)
             }

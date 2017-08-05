@@ -10,10 +10,16 @@ import javax.swing.JPanel
 
 class MazeViewer(private val maze: Maze, private val route: List<Point>? = null) {
 
+    private val squareSize: Int
+
+    init {
+        squareSize = SQUARE_BASE_SIZE / maze.height * 2
+    }
+
     fun show() {
         val frm = JFrame()
         frm.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-        frm.contentPane.preferredSize = Dimension(SQUARE_SIZE * (maze.width / 2), SQUARE_SIZE * (maze.height / 2))
+        frm.contentPane.preferredSize = Dimension(squareSize * (maze.width / 2), squareSize * (maze.height / 2))
 
         frm.contentPane.add(object : JPanel() {
             override fun paintComponent(g: Graphics?) {
@@ -23,7 +29,7 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
                 route?.forEach {
                     g2?.stroke = BasicStroke(1.0f)
                     g2?.color = Color.RED
-                    g2?.fillRect(it.x / 2 * SQUARE_SIZE, it.y / 2 * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+                    g2?.fillRect(it.x / 2 * squareSize, it.y / 2 * squareSize, squareSize, squareSize)
                 }
 
                 // 迷路の描画
@@ -31,10 +37,10 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
                 g2?.stroke = BasicStroke(4.0f)
                 for (x in 1..maze.width step 2) {
                     for (y in 1..maze.height step 2) {
-                        val pointNW = Point(x / 2 * SQUARE_SIZE, y / 2 * SQUARE_SIZE)
-                        val pointNE = Point(x / 2 * SQUARE_SIZE + SQUARE_SIZE, y / 2 * SQUARE_SIZE)
-                        val pointSW = Point(x / 2 * SQUARE_SIZE, y / 2 * SQUARE_SIZE + SQUARE_SIZE)
-                        val pointSE = Point(x / 2 * SQUARE_SIZE + SQUARE_SIZE, y / 2 * SQUARE_SIZE + SQUARE_SIZE)
+                        val pointNW = Point(x / 2 * squareSize, y / 2 * squareSize)
+                        val pointNE = Point(x / 2 * squareSize + squareSize, y / 2 * squareSize)
+                        val pointSW = Point(x / 2 * squareSize, y / 2 * squareSize + squareSize)
+                        val pointSE = Point(x / 2 * squareSize + squareSize, y / 2 * squareSize + squareSize)
                         if (maze.get(Point(x, y) + Direction.NORTH.pointInc) == PointStatus.WALL) {
                             g2?.drawLine(pointNW, pointNE)
                         }
@@ -57,7 +63,7 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
     }
 
     companion object {
-        val SQUARE_SIZE = 16
+        val SQUARE_BASE_SIZE = 1024
     }
 
 }

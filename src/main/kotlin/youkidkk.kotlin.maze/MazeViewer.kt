@@ -6,7 +6,7 @@ import java.awt.*
 import javax.swing.JFrame
 import javax.swing.JPanel
 
-class MazeViewer(private val maze: Maze) {
+class MazeViewer(private val maze: Maze, private val route: List<Point>? = null) {
 
     fun show() {
         val frm = JFrame()
@@ -16,6 +16,15 @@ class MazeViewer(private val maze: Maze) {
         frm.contentPane.add(object : JPanel() {
             override fun paintComponent(g: Graphics?) {
                 val g2: Graphics2D? = g as Graphics2D
+
+                // ルートの描画
+                route?.forEach {
+                    g2?.stroke = BasicStroke(1.0f)
+                    g2?.color = Color.RED
+                    g2?.fillRect(it.x / 2 * SQUARE_SIZE, it.y / 2 * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+                }
+
+                // 迷路の描画
                 g2?.color = Color.BLACK
                 g2?.stroke = BasicStroke(4.0f)
                 for (x in 1..maze.width step 2) {

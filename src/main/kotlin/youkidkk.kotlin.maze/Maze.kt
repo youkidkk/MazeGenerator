@@ -1,5 +1,6 @@
 package youkidkk.kotlin.maze
 
+import youkidkk.kotlin.maze.enums.Direction
 import youkidkk.kotlin.maze.enums.PointStatus
 
 /**
@@ -72,6 +73,34 @@ class Maze(val width: Int, val height: Int) {
      */
     fun isInside(point: Point) : Boolean {
         return point.x in 1..width && point.y in 1..height
+    }
+
+    /**
+     * 地点から移動可能な方向のリストを取得する。
+     *
+     * @param point 地点
+     * @return 移動可能な方向のリスト
+     */
+    fun getMoveableDirections(point: Point) : List<Direction> {
+        val result = mutableListOf<Direction>()
+        Direction.values().forEach {
+            if (isMoveable(point, it)) {
+                result.add(it)
+            }
+        }
+        return result
+    }
+
+    /**
+     * 地点から対象の方向へ移動可能であるか判定する。
+     *
+     * @param point 地点
+     * @param direction 方向
+     * @return 判定結果
+     */
+    fun isMoveable(point: Point, direction: Direction) : Boolean {
+        val dist = point + (direction.pointInc * 2)
+        return isInside(dist) && get(point + direction.pointInc).passible
     }
 
     override fun toString(): String {

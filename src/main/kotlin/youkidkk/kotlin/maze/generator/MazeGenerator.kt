@@ -1,5 +1,7 @@
-package youkidkk.kotlin.maze
+package youkidkk.kotlin.maze.generator
 
+import youkidkk.kotlin.maze.Maze
+import youkidkk.kotlin.maze.Point
 import youkidkk.kotlin.maze.enums.Direction
 import youkidkk.kotlin.maze.enums.PointStatus
 import java.util.*
@@ -73,7 +75,7 @@ class MazeGenerator(paramWidth: Int = 0,
      * 最初の開始地点を取得。
      */
     private fun getFirstPoint() : Point = Point(
-            getRandomInt(width  / 2) * 2 + 1,
+            getRandomInt(width / 2) * 2 + 1,
             getRandomInt(height / 2) * 2 + 1
     )
 

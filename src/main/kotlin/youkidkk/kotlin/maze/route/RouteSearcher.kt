@@ -1,4 +1,7 @@
-package youkidkk.kotlin.maze
+package youkidkk.kotlin.maze.route
+
+import youkidkk.kotlin.maze.Maze
+import youkidkk.kotlin.maze.Point
 
 class RouteSearcher(val maze: Maze, val start: Point, val end: Point) {
 

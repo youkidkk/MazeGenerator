@@ -1,7 +1,11 @@
 package youkidkk.kotlin.maze
 
+import youkidkk.kotlin.maze.generator.MazeGenerator
+import youkidkk.kotlin.maze.route.RouteSearcher
+import youkidkk.kotlin.maze.viewer.MazeViewer
+
 fun main(args: Array<String>) {
     val maze = MazeGenerator(64, 64).generate()
-    val route = RouteSearcher(maze, Point(1,1), Point(127, 127)).search()
+    val route = RouteSearcher(maze, Point(1, 1), Point(127, 127)).search()
     MazeViewer(maze, route).show()
 }

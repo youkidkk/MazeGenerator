@@ -1,5 +1,7 @@
-package youkidkk.kotlin.maze
+package youkidkk.kotlin.maze.viewer
 
+import youkidkk.kotlin.maze.Maze
+import youkidkk.kotlin.maze.Point
 import youkidkk.kotlin.maze.enums.Direction
 import youkidkk.kotlin.maze.enums.PointStatus
 import java.awt.*

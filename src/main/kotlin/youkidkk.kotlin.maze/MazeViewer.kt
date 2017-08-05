@@ -63,9 +63,3 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
 fun Graphics.drawLine(pointStart: Point, pointEnd: Point) : Unit {
     this.drawLine(pointStart.x, pointStart.y, pointEnd.x, pointEnd.y)
 }
-
-fun main(args: Array<String>) {
-    val size = 64
-    val maze = MazeGenerator(size, size).generate()
-    MazeViewer(maze).show()
-}

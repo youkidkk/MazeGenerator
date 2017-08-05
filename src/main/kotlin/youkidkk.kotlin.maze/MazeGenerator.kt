@@ -188,7 +188,3 @@ class MazeGenerator(paramWidth: Int = 0,
     }
 
 }
-
-fun main(args: Array<String>) {
-    println(MazeGenerator().generate())
-}

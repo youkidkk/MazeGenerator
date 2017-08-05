@@ -1,7 +1,5 @@
 package youkidkk.kotlin.maze
 
-import youkidkk.kotlin.maze.enums.Direction
-
 class RouteSearcher(val maze: Maze, val start: Point, val end: Point) {
 
     lateinit var visited: MutableMap<Point, List<Point>>
@@ -13,12 +11,12 @@ class RouteSearcher(val maze: Maze, val start: Point, val end: Point) {
 
         visited.put(start, route)
 
-        todo(start, route)
+        go(start, route)
 
         return visited.get(end)!!
     }
 
-    fun todo(point: Point, route: List<Point>) {
+    private fun go(point: Point, route: List<Point>) {
         if (point == end) {
             return
         }
@@ -31,7 +29,7 @@ class RouteSearcher(val maze: Maze, val start: Point, val end: Point) {
                 next.add(distPoint)
                 visited.put(distPoint, next)
 
-                todo(distPoint, next)
+                go(distPoint, next)
             }
         }
     }

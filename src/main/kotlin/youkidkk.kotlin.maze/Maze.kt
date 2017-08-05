@@ -65,6 +65,15 @@ class Maze(val width: Int, val height: Int) {
         this.set(point.x, point.y, state)
     }
 
+    /**
+     * 地点が範囲内であるか判定する。
+     *
+     * @return 判定結果
+     */
+    fun isNotOutOfRange(point: Point) : Boolean {
+        return point.x in 1..width && point.y in 1..height
+    }
+
     override fun toString(): String {
         val result = StringBuilder()
         for (y in 0..height) {

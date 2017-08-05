@@ -36,16 +36,16 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
                         val pointSW = Point(x / 2 * SQUARE_SIZE, y / 2 * SQUARE_SIZE + SQUARE_SIZE)
                         val pointSE = Point(x / 2 * SQUARE_SIZE + SQUARE_SIZE, y / 2 * SQUARE_SIZE + SQUARE_SIZE)
                         if (maze.get(Point(x, y) + Direction.NORTH.pointInc) == PointStatus.WALL) {
-                            g?.drawLine(pointNW, pointNE)
+                            g2?.drawLine(pointNW, pointNE)
                         }
                         if (maze.get(Point(x, y) + Direction.WEST.pointInc) == PointStatus.WALL) {
-                            g?.drawLine(pointNW, pointSW)
+                            g2?.drawLine(pointNW, pointSW)
                         }
                         if (maze.get(Point(x, y) + Direction.SOUTH.pointInc) == PointStatus.WALL) {
-                            g?.drawLine(pointSW, pointSE)
+                            g2?.drawLine(pointSW, pointSE)
                         }
                         if (maze.get(Point(x, y) + Direction.EAST.pointInc) == PointStatus.WALL) {
-                            g?.drawLine(pointNE, pointSE)
+                            g2?.drawLine(pointNE, pointSE)
                         }
                     }
                 }

@@ -72,7 +72,7 @@ class MazeGenerator(paramWidth: Int = 0,
     /**
      * 最初の開始地点を取得。
      */
-    fun getFirstPoint() : Point = Point(
+    private fun getFirstPoint() : Point = Point(
             getRandomInt(width  / 2) * 2 + 1,
             getRandomInt(height / 2) * 2 + 1
     )
@@ -83,7 +83,7 @@ class MazeGenerator(paramWidth: Int = 0,
      *
      * @param startPoint 開始地点
      */
-    fun dig(startPoint: Point) : Unit {
+    private fun dig(startPoint: Point) : Unit {
         var currentPoint = startPoint.copy()
 
         // 道の長さの分、繰り返す
@@ -108,7 +108,7 @@ class MazeGenerator(paramWidth: Int = 0,
      * @param point 地点
      * @return 掘れる方向のリスト
      */
-    fun getDiggableDirections(point: Point) : List<Direction> {
+    private fun getDiggableDirections(point: Point) : List<Direction> {
         // 戻り値
         val result = mutableListOf<Direction>()
 
@@ -131,7 +131,7 @@ class MazeGenerator(paramWidth: Int = 0,
      *
      * @return 開始地点候補のリスト
      */
-    fun getDiggableStartPoints() : List<Point> {
+    private fun getDiggableStartPoints() : List<Point> {
         // 戻り値
         val result = mutableListOf<Point>()
 
@@ -155,7 +155,7 @@ class MazeGenerator(paramWidth: Int = 0,
      * @param point 地点
      * @param direction 方向
      */
-    fun digWall(point: Point, direction: Direction) : Point {
+    private fun digWall(point: Point, direction: Direction) : Point {
         maze.set(point + direction.pointInc, PointStatus.FLOOR)
         val result = point + ( direction.pointInc * 2 )
         maze.set(result, PointStatus.FLOOR)
@@ -168,7 +168,7 @@ class MazeGenerator(paramWidth: Int = 0,
      * @param max 最大値
      * @return 0から最大値未満のランダムな数値
      */
-    fun getRandomInt(max: Int) = Random().nextInt(max)
+    private fun getRandomInt(max: Int) = Random().nextInt(max)
 
     /**
      * 定数。

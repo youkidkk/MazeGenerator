@@ -12,10 +12,14 @@ import java.util.*
  * @param paramWidth 迷路の幅
  * @param paramHeight 迷路の高さ
  * @param paramWayLength 道の長さ
+ * @param startPoint 開始地点
+ * @param endPoint 終了地点
  */
 class MazeGenerator(paramWidth: Int = 0,
                     paramHeight: Int = 0,
-                    paramWayLength: Int = 0) {
+                    paramWayLength: Int = 0,
+                    val startPoint: Point? = null,
+                    val endPoint: Point? = null) {
 
     /**
      * 迷路オブジェクト。
@@ -94,22 +98,35 @@ class MazeGenerator(paramWidth: Int = 0,
     /**
      * 最初の開始地点を取得。
      */
-    private fun getFirstPoint() : Point = Point(
-            getRandomInt(width / 2) * 2 + 1,
-            getRandomInt(height / 2) * 2 + 1
-    )
+    private fun getFirstPoint() : Point {
+        while (true) {
+            val point = Point(
+                    getRandomInt(width / 2) * 2 + 1,
+                    getRandomInt(height / 2) * 2 + 1
+            )
+            if (point != startPoint && point != endPoint) {
+                // 開始地点でも終了地点でもない場合は返却する
+                return point
+            }
+        }
+    }
 
     /**
-     * 開始地点から道を掘り進める。
+     * 対象地点から道を掘り進める。
      * 道の長さに達したとき、または掘れる方向がなくなるまで行う。
      *
-     * @param startPoint 開始地点
+     * @param point 対象地点
      */
-    private fun dig(startPoint: Point) : Unit {
-        var currentPoint = startPoint.copy()
+    private fun dig(point: Point) : Unit {
+        var currentPoint = point.copy()
 
         // 道の長さの分、繰り返す
         for (i in 0..maxWayLength) {
+            // 現在位置が開始地点か終了地点の場合、繰り返しを終了する
+            if (currentPoint == startPoint || currentPoint == endPoint) {
+                break
+            }
+
             // 掘れる方向のリストを取得する
             val diggableDirections = getDiggableDirections(currentPoint)
 

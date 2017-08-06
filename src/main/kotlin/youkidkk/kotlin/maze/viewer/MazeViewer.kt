@@ -4,11 +4,15 @@ import youkidkk.kotlin.maze.Maze
 import youkidkk.kotlin.maze.Point
 import youkidkk.kotlin.maze.enums.Direction
 import youkidkk.kotlin.maze.enums.PointStatus
+import youkidkk.kotlin.maze.generator.MazeGenerator
+import youkidkk.kotlin.maze.route.RouteSearcher
 import java.awt.*
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 import javax.swing.JFrame
 import javax.swing.JPanel
 
-class MazeViewer(private val maze: Maze, private val route: List<Point>? = null) {
+class MazeViewer(private var maze: Maze, private var route: List<Point>? = null) {
 
     private val squareSize: Int
 
@@ -21,9 +25,12 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
         frm.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         frm.contentPane.preferredSize = Dimension(squareSize * (maze.width / 2), squareSize * (maze.height / 2))
 
-        frm.contentPane.add(object : JPanel() {
+        val panel = object : JPanel() {
             override fun paintComponent(g: Graphics?) {
                 val g2: Graphics2D? = g as Graphics2D
+
+                g2?.color = Color.WHITE
+                g2?.fillRect(0, 0, squareSize * (maze.width / 2), squareSize * (maze.height / 2))
 
                 // ルートの描画
                 route?.forEach {
@@ -56,7 +63,24 @@ class MazeViewer(private val maze: Maze, private val route: List<Point>? = null)
                     }
                 }
             }
+        }
+        panel.isFocusable = true
+        panel.addKeyListener(object : KeyListener {
+            override fun keyTyped(e: KeyEvent?) {
+                val width = maze.width
+                val height = maze.height
+
+                maze = MazeGenerator(maze.width, maze.height, startPoint = Point(1, 1), endPoint = Point(width - 1, height - 1)).generate()
+                route = RouteSearcher(maze, Point(1, 1), Point(width - 1, height - 1)).search()
+                panel.repaint()
+            }
+
+            override fun keyPressed(e: KeyEvent?) { }
+
+            override fun keyReleased(e: KeyEvent?) { }
         })
+
+        frm.contentPane.add(panel)
         frm.pack()
         frm.setLocationRelativeTo(null)
         frm.isVisible = true

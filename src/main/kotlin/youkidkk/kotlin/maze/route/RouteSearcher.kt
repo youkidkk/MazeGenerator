@@ -10,7 +10,19 @@ import youkidkk.kotlin.maze.Point
  * @param start 開始地点
  * @param end 終了地点
  */
-class RouteSearcher(val maze: Maze, val start: Point, val end: Point) {
+class RouteSearcher(private val maze: Maze, private var start: Point, private var end: Point) {
+
+    /**
+     * イニシャライザ。
+     */
+    init {
+        if (!maze.isInside(start)) {
+            start = Point(1, 1)
+        }
+        if (!maze.isInside(end)) {
+            end = Point(maze.width - 1, maze.height - 1)
+        }
+    }
 
     /**
      * 到達済み地点マップ。

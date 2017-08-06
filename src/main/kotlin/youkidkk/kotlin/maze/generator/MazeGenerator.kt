@@ -74,12 +74,12 @@ class MazeGenerator(paramWidth: Int = 0,
         maze = Maze(width, height)
 
         // 開始地点を取得し、床にする
-        var startPoint = getFirstPoint()
-        maze.set(startPoint, PointStatus.FLOOR)
+        var currentPoint = getFirstPoint()
+        maze.set(currentPoint, PointStatus.FLOOR)
 
         while (true) {
             // 現在地点から掘り進む
-            dig(startPoint)
+            dig(currentPoint)
 
             // 開始地点候補のリストを取得する
             val diggablePoints = getDiggableStartPoints()
@@ -88,7 +88,7 @@ class MazeGenerator(paramWidth: Int = 0,
                 break
             } else {
                 // 開始地点候補のリストのうち、いずれかをランダムに開始地点とする
-                startPoint = diggablePoints[getRandomInt(diggablePoints.size)]
+                currentPoint = diggablePoints[getRandomInt(diggablePoints.size)]
             }
         }
 
